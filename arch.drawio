@@ -1,9 +1,54 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.1.0">
   <diagram name="Página-1" id="fRWq5kq-AfSTJk6vT0WC">
-    <mxGraphModel dx="2066" dy="1103" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1722" dy="919" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="jjabEbmVEw8Lbo9vZban-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="jjabEbmVEw8Lbo9vZban-1" target="jjabEbmVEw8Lbo9vZban-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-11" value="Text" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="jjabEbmVEw8Lbo9vZban-3">
+          <mxGeometry x="-0.15" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-12" value="HTTP/JSON (REST)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="jjabEbmVEw8Lbo9vZban-3">
+          <mxGeometry x="-0.15" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-7" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="907.5" y="520" width="552.5" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-1" value="User&lt;div&gt;(Web Navegator/ frontEnd)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1098.75" y="200" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="jjabEbmVEw8Lbo9vZban-2" target="jjabEbmVEw8Lbo9vZban-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-10" value="HTTP/JSON (REST)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="jjabEbmVEw8Lbo9vZban-9">
+          <mxGeometry x="-0.0667" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-2" value="FrontEnd Web&lt;div&gt;React + TypeStcript + D3.js&lt;/div&gt;&lt;div&gt;(Visualización y UI)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1086.25" y="340" width="195" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="jjabEbmVEw8Lbo9vZban-4" target="jjabEbmVEw8Lbo9vZban-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-4" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;API REST&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li style=&quot;&quot;&gt;/generate_graph&lt;/li&gt;&lt;li style=&quot;&quot;&gt;/run_algorithm&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="1117.5" y="570" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-5" value="&lt;div style=&quot;&quot;&gt;Core Graphs module&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;Representation (adj list/matrix)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;Algorithms (BFS, DFS, Dijkstra, ...)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;Load/Save (JSON, GraphML, ...)&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1081.88" y="740" width="231.25" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-6" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Serializacion JSON (nlohman/json)&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1088.76" y="910" width="217.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jjabEbmVEw8Lbo9vZban-8" value="Backend C++" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=19;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="920" y="535" width="140" height="40" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
