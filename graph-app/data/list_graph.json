@@ -1,0 +1,21 @@
+{
+    "directed": true,
+    "edges": [
+        {
+            "from": 0,
+            "to": 1,
+            "weight": 3.5
+        }
+    ],
+    "nodes": [
+        {
+            "id": 0,
+            "label": "A"
+        },
+        {
+            "id": 1,
+            "label": "B"
+        }
+    ],
+    "type": "list"
+}

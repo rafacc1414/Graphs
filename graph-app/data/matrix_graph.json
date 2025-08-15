@@ -1,0 +1,22 @@
+{
+    "directed": true,
+    "edges": [
+        {
+            "from": 0,
+            "to": 1,
+            "weight": 2.5
+        }
+    ],
+    "nodes": [
+        {
+            "id": 0,
+            "label": "A"
+        },
+        {
+            "id": 1,
+            "label": "B"
+        }
+    ],
+    "size": 2,
+    "type": "matrix"
+}
