@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <string_view>
 
 /**
  * @brief Represents a directed or undirected graph.
@@ -33,6 +34,11 @@ public:
      * @brief Prints the graph representation to the console.
      */
     void printGraph() const;
+    
+    bool isDirected() const { return directed_; }
+    const std::unordered_map<int, std::string>& getNodes() const { return nodes_; }
+    const std::unordered_map<int, std::vector<std::pair<int, double>>>& getAdjList() const { return adjList_; }
+
 
 private:
     bool directed_; ///< Indicates if the graph is directed.

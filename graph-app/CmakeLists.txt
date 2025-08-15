@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 project(graph-app LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -10,6 +10,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # Include folder
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
+find_package(nlohmann_json REQUIRED)
 # Add subdirectories
 add_subdirectory(src/graph_core)
 add_subdirectory(src/api)
+
+add_executable(graph-app src/main.cpp)
+target_link_libraries(graph-app PRIVATE graph_core graph_api nlohmann_json::nlohmann_json)

@@ -1,3 +1,5 @@
-add_executable(graph_api main.cpp)
 
-target_link_libraries(graph_api PRIVATE graph_core)
+find_package(nlohmann_json REQUIRED)
+add_library(graph_api STATIC GraphAPI.cpp)
+target_include_directories(graph_api PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_link_libraries(graph_api PUBLIC graph_core nlohmann_json::nlohmann_json)
