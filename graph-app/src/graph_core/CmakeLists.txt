@@ -1,0 +1,3 @@
+add_library(graph_core Graph.cpp)
+
+target_include_directories(graph_core PUBLIC ${CMAKE_SOURCE_DIR}/include)
