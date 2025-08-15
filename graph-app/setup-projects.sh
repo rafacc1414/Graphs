@@ -22,7 +22,7 @@ fi
 
 # Configurar Conan e instalar dependencias
 echo "Installing Conan dependencies..."
-conan install .. -s compiler.cppstd=20
+conan install .. -s compiler.cppstd=20 --build=missing
 
 # Decidir si ejecutar cmake ..
 if [ ! -f "$CMAKE_CACHE" ]; then
