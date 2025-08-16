@@ -1,51 +1,64 @@
-# Función para Generar Grafos Aleatorios
+# 📄 GraphGenerator.hpp
 
-Esta función permite generar grafos aleatorios basados en varios parámetros, tales como:
-
-- Número de nodos
-- Probabilidad de existencia de una arista entre dos nodos
-- Rango de pesos de las aristas
-- Si el grafo es dirigido o no
+Este módulo implementa utilidades para la **generación aleatoria de grafos ponderados**, tanto en **lista de adyacencia** como en **matriz de adyacencia**, con soporte para **grafos dirigidos y no dirigidos**.
 
 ---
 
-## Objetivo
+## ✨ Función auxiliar: randomWeight
 
-El propósito de la función es:
+### Descripción
+Genera un peso aleatorio dentro de un rango definido por valores mínimo y máximo.  
+El comportamiento depende del tipo de dato:
 
-- **Testing:** Probar algoritmos de grafos en diferentes tamaños y densidades.  
-- **Benchmarking:** Medir rendimiento con grafos grandes o densos.  
-- **Simulación:** Modelar redes, caminos y otras estructuras aleatorias.
+- Para valores enteros se utiliza una distribución uniforme discreta.  
+- Para valores reales (como float o double) se utiliza una distribución uniforme continua.  
 
----
-
-## Lógica Paso a Paso
-
-1. **Crear el grafo vacío**  
-   Según el tipo (`AdjacencyListGraph` o `AdjacencyMatrixGraph`) y con el número de nodos indicado.
-
-2. **Recorrer pares de nodos**  
-   - Para grafos no dirigidos, evitar duplicar aristas (`A→B` y `B→A`).  
-   - Para grafos dirigidos, considerar ambas direcciones si la probabilidad lo permite.
-
-3. **Decidir si añadir una arista**  
-   - Generar un número aleatorio entre `[0, 1]`.  
-   - Si el número es menor que `edgeProbability`, se añade la arista.
-
-4. **Asignar peso aleatorio**  
-   - Elegir un valor entre `minWeight` y `maxWeight`.
-
-5. **Devolver el grafo generado**  
-   - Contendrá todos los nodos y aristas según los parámetros especificados.
+### Teoría
+En los grafos ponderados, los pesos de las aristas suelen representar un coste, distancia o capacidad. Al utilizar distribuciones uniformes, todos los valores posibles dentro del rango tienen la misma probabilidad de ser seleccionados, garantizando neutralidad en la asignación de pesos.
 
 ---
 
-## Ejemplo de Uso
+## 🏗️ Clase: GraphGenerator
 
-```cpp
-auto g = GraphGenerator::generateRandomGraph<double>(
-    5,        // 5 nodos
-    0.4,      // 40% de probabilidad de arista
-    1.0, 10.0,// pesos entre 1 y 10
-    false     // no dirigido
-);
+### Método: generateAdjacencyListGraph
+
+#### Parámetros
+- Número de nodos.  
+- Probabilidad de arista entre dos nodos.  
+- Peso mínimo y máximo.  
+- Indicador de si el grafo es dirigido o no.  
+
+#### Retorno
+Un grafo representado mediante lista de adyacencia con aristas y pesos generados aleatoriamente.
+
+#### Teoría
+Este método utiliza el modelo de **Erdős–Rényi (G(n,p))**, donde cada par de nodos tiene una probabilidad determinada de estar conectado.  
+Si el grafo es no dirigido, se evita la duplicación de aristas al considerar únicamente pares de nodos distintos con un índice mayor. Los pesos se asignan mediante la función auxiliar randomWeight.
+
+---
+
+### Método: generateAdjacencyMatrixGraph
+
+#### Parámetros
+Los mismos que en la versión basada en lista de adyacencia.  
+
+#### Retorno
+Un grafo representado mediante matriz de adyacencia de tamaño n x n, en la cual cada celda indica la existencia y el peso de una arista.  
+
+#### Teoría
+Este enfoque es más costoso en memoria ya que requiere O(n²), pero proporciona acceso inmediato a la existencia de aristas entre dos nodos. Es más adecuado para grafos densos, donde la mayoría de pares de nodos están conectados.
+
+---
+
+## 📊 Comparativa de representaciones
+
+- **Lista de adyacencia**: requiere memoria proporcional a la suma de nodos y aristas, y resulta más eficiente en grafos dispersos.  
+- **Matriz de adyacencia**: requiere memoria cuadrática con respecto al número de nodos, pero permite acceso inmediato a la existencia de aristas. Es más útil en grafos densos.  
+
+---
+
+## 📚 Referencias
+
+- Modelo Erdős–Rényi (G(n,p))  
+- Distribución uniforme discreta (`uniform_int_distribution`)  
+- Distribución uniforme continua (`uniform_real_distribution`)  
