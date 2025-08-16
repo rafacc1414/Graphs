@@ -1,5 +1,6 @@
 #pragma once
 #include "graph_core/GraphStorage.hpp"
+#include "graph_core/algorithms.hpp"
 #include <nlohmann/json.hpp>
 
 /**
@@ -97,5 +98,65 @@ public:
         }
 
         return graph;
+    }
+
+    // --------- TraversalResult ↔ JSON ---------
+    static nlohmann::json serialize(const TraversalResult& r) {
+        nlohmann::json j;
+        j["type"]   = "traversal";
+        j["source"] = r.source;
+        j["order"]  = r.order;
+
+        j["parent"] = nlohmann::json::array();
+        for (const auto& [u, p] : r.parent) j["parent"].push_back({{"node", u}, {"parent", p}});
+
+        j["depth"] = nlohmann::json::array();
+        for (const auto& [u, d] : r.depth)  j["depth"].push_back({{"node", u}, {"depth", d}});
+
+        return j;
+    }
+
+    static TraversalResult deserializeTraversal(const nlohmann::json& j) {
+        TraversalResult r;
+        r.source = j.at("source").get<int>();
+        r.order  = j.at("order").get<std::vector<int>>();
+
+        for (const auto& kv : j.at("parent")) {
+            r.parent[kv.at("node").get<int>()] = kv.at("parent").get<int>();
+        }
+        for (const auto& kv : j.at("depth")) {
+            r.depth[kv.at("node").get<int>()] = kv.at("depth").get<int>();
+        }
+        return r;
+    }
+
+    // --------- DijkstraResult ↔ JSON ---------
+    template<typename Weight = double>
+    static nlohmann::json serialize(const DijkstraResult<Weight>& r) {
+        nlohmann::json j;
+        j["type"]   = "dijkstra";
+        j["source"] = r.source;
+
+        j["dist"] = nlohmann::json::array();
+        for (const auto& [u, d] : r.dist) j["dist"].push_back({{"node", u}, {"dist", d}});
+
+        j["parent"] = nlohmann::json::array();
+        for (const auto& [u, p] : r.parent) j["parent"].push_back({{"node", u}, {"parent", p}});
+
+        return j;
+    }
+
+    template<typename Weight = double>
+    static DijkstraResult<Weight> deserializeDijkstra(const nlohmann::json& j) {
+        DijkstraResult<Weight> r;
+        r.source = j.at("source").get<int>();
+
+        for (const auto& kv : j.at("dist")) {
+            r.dist[kv.at("node").get<int>()] = kv.at("dist").get<Weight>();
+        }
+        for (const auto& kv : j.at("parent")) {
+            r.parent[kv.at("node").get<int>()] = kv.at("parent").get<int>();
+        }
+        return r;
     }
 };
