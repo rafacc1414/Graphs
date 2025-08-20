@@ -4,14 +4,18 @@ project(graph-app LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Target mínimo de Windows: Windows 10
+add_definitions(-D_WIN32_WINNT=0x0A00)
+
 # Output dir
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Include folder
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
+find_package(Crow REQUIRED)
 find_package(nlohmann_json REQUIRED)
 
 add_subdirectory(tests)
-add_executable(graph_app src/main.cpp)
-target_link_libraries(graph_app PRIVATE nlohmann_json::nlohmann_json)
+add_executable(graph_app src/main.cpp src/api/GraphAPI.cpp)
+target_link_libraries(graph_app PRIVATE nlohmann_json::nlohmann_json Crow::Crow)
