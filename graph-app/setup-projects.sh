@@ -6,6 +6,8 @@ BUILD_DIR="build"
 CMAKE_CACHE="$BUILD_DIR/CMakeCache.txt"
 ROOT_CMAKE="CMakeLists.txt"
 
+BUILD_TYPE=${1:-release}
+
 if [ ! -d "$BUILD_DIR" ]; then
     echo "Creating build directory..."
     mkdir "$BUILD_DIR"
@@ -22,17 +24,17 @@ fi
 
 # Configurar Conan e instalar dependencias
 echo "Installing Conan dependencies..."
-conan install .. -s compiler.cppstd=20 --build=missing
+conan install .. -s compiler.cppstd=20 --build=missing -s build_type=Debug
 
 # Decidir si ejecutar cmake ..
 if [ ! -f "$CMAKE_CACHE" ]; then
     echo "Running CMake configuration (first time)..."
-    cmake .. --preset conan-default
+    cmake .. --preset conan-default -DCMAKE_BUILD_TYPE=$BUILD_TYPE
 else
     # Comprobar si el CMakeLists.txt raíz es más reciente que el cache
     if [ "../$ROOT_CMAKE" -nt "$CMAKE_CACHE" ]; then
         echo "Detected changes in CMakeLists.txt, reconfiguring..."
-        cmake .. --preset conan-default
+        cmake .. --preset conan-default -DCMAKE_BUILD_TYPE=$BUILD_TYPE
     else
         echo "CMake configuration is up-to-date."
     fi
@@ -40,6 +42,7 @@ fi
 
 cd ..
 echo "Building project..."
-cmake --build --preset conan-release
-echo "Done! Run with: ./build/bin/Debug/graph_api.exe"
+cmake --build --preset conan-$BUILD_TYPE
+
+echo "Done! Run with: ./build/bin/$BUILD_TYPE/graph_api.exe"
 

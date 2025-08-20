@@ -2,12 +2,15 @@
 #include "graph_core/GraphStorage.hpp"
 #include "graph_core/algorithms.hpp"
 #include <nlohmann/json.hpp>
+#include <crow.h>
 
 /**
  * @brief Provides JSON serialization and deserialization for different graph representations.
  */
 class GraphAPI {
 public:
+    static void registerEndpoints(crow::SimpleApp& app);
+
     //
     // Adjacency List
     //

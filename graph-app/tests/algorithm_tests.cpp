@@ -15,7 +15,7 @@ TEST(AlgorithmsTest, BFSBasic) {
     g.addEdge(1, 3, 1.0);
     g.addEdge(2, 3, 1.0);
 
-    TraversalResult r = BFS(g, 0);
+    TraversalResult r = Algorithms::BFS(g, 0);
 
     // orden válido: 0 primero, después 1 y 2, y 3 al final
     EXPECT_EQ(r.order.front(), 0);
@@ -39,7 +39,7 @@ TEST(AlgorithmsTest, DFSBasic) {
     g.addEdge(1, 3, 1.0);
     g.addEdge(2, 3, 1.0);
 
-    TraversalResult r = DFS(g, 0);
+    TraversalResult r = Algorithms::DFS(g, 0);
 
     // debe visitar todos los nodos
     EXPECT_EQ(r.order.size(), 4);
@@ -61,7 +61,7 @@ TEST(AlgorithmsTest, DijkstraBasic) {
     g.addEdge(1, 3, 1.0);
     g.addEdge(2, 3, 5.0);
 
-    auto r = Dijkstra(g, 0);
+    auto r = Algorithms::Dijkstra(g, 0);
 
     // distancia esperada:
     // 0 -> 0
@@ -87,9 +87,35 @@ TEST(AlgorithmsTest, DijkstraPathReconstruction) {
     g.addEdge(1, 2, 1.0);
     g.addEdge(2, 3, 1.0);
 
-    auto r = Dijkstra(g, 0);
-    auto path = ReconstructPath<double>(3, r.parent);
+    auto r = Algorithms::Dijkstra(g, 0);
+    auto path = Algorithms::ReconstructPath<double>(3, r.parent);
 
     std::vector<int> expected = {0, 1, 2, 3};
     EXPECT_EQ(path, expected);
+}
+
+// ---------- TEST Dijkstra distancias ----------  
+TEST(AlgorithmsTest, DijkstraDistances) {
+    AdjacencyListGraph<double> g;
+    // Grafo:
+    // 0 --1--> 1 --2--> 2
+    // 0 --4--> 2
+    g.addEdge(0, 1, 1.0);
+    g.addEdge(1, 2, 2.0);
+    g.addEdge(0, 2, 4.0);
+
+    auto r = Algorithms::Dijkstra(g, 0);
+
+    // Distancias mínimas esperadas desde el nodo 0
+    std::unordered_map<int, double> expectedDistances = {
+        {0, 0.0},  // distancia a sí mismo
+        {1, 1.0},  // 0->1
+        {2, 3.0}   // 0->1->2 es más corto que 0->2 directo
+    };
+
+    // Comprobar que todas las distancias coinciden
+    for (const auto& [node, dist] : expectedDistances) {
+        ASSERT_TRUE(r.dist.find(node) != r.dist.end());
+        EXPECT_DOUBLE_EQ(r.dist[node], dist);
+    }
 }
